@@ -13,6 +13,12 @@ import Product from './components/Product/Product';
 import Subtotal from './components/Subtotal/Subtotal';
 import { useStateValue } from './components/StateProvider';
 import {auth} from "./components/firebase";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const promise = loadStripe(
+  "pk_test_51HWOUYB8jFz94UlxH8XmxG0ts3aSKTtgwSbt2lA4UOoMEqdiZabZ0YwMVj58YTmBZKKXqTfNduDmkvN0k4yMszyw00VGn3J5ib"
+);
 
 function App() {
   const [{user},dispatch]=useStateValue();
@@ -55,9 +61,9 @@ console.log("User is :",user);
           </Route>
           <Route path="/payment">
             <Header />
-            {/* <Elements stripe={promise}> */}
+            <Elements stripe={promise}>
               <Payment />
-            {/* </Elements> */}
+            </Elements>
           </Route>
           <Route path="/">
             <Header />
